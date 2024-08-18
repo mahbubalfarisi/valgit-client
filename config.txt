@@ -1,0 +1,5 @@
+APP_PORT=3003
+NGROK_PATH=C:/ngrok/ngrok.exe
+LOCAL_REPO_DIR=E:
+LOCAL_REPO_PATH=\Projects\pvs-valheim-world
+REPO_BRANCH=main
