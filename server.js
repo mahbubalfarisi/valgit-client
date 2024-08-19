@@ -36,10 +36,17 @@ app.get('/trigger-pull', (req, res) => {
             console.error(`Error: ${error.message}`);
             return res.status(500).send('Failed to trigger git pull.');
         }
-        // if (stderr) {
-        //     console.error(`Stderr: ${stderr}`);
-        //     return res.status(500).send(`Git pull completed with errors: ${stderr}`);
-        // }
+
+        // Check if the output indicates "Already up to date."
+        if ((stdout && stdout.includes('Already up to date.')) || (stderr && stderr.includes('Already up to date.'))) {
+            console.log('Git pull operation completed successfully: Already up to date.');
+            return res.status(200).send('Git pull operation completed successfully: Already up to date.');
+        }
+
+        if (stderr) {
+            console.warn(`Stderr: ${stderr}`);
+            return res.status(500).send(`Git pull completed with errors: ${stderr}`);
+        }
 
         console.log(`Git Pull Output: ${stdout}`);
         res.send(`Git pull operation completed successfully:\n${stdout}`);
@@ -56,10 +63,6 @@ app.get('/trigger-push', (req, res) => {
             console.error(`Error: ${error.message}`);
             return res.status(500).send('Failed to trigger git push.');
         }
-        // if (stderr) {
-        //     console.error(`Stderr: ${stderr}`);
-        //     return res.status(500).send(`Git push completed with errors: ${stderr}`);
-        // }
 
         console.log(`Git Push Output: ${stdout}`);
         res.send(`Git Push operation completed successfully:\n${stdout}`);
