@@ -1,4 +1,5 @@
 APP_PORT=3003
+APP_DOMAIN=cute-trusting-lion.ngrok-free.app
 NGROK_PATH=C:/ngrok/ngrok.exe
 LOCAL_REPO_DIR=E:
 LOCAL_REPO_PATH=\Projects\pvs-valheim-world
